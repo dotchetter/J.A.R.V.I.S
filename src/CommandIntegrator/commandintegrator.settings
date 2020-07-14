@@ -1,0 +1,9 @@
+{
+	"log_filename": "jarvis.log",
+
+	"log_dir": ".",
+	
+	"logfile_append": false,
+	
+	"chosen_language": "en-us"
+}
