@@ -135,9 +135,9 @@ class TimeKeeperFeature(ci.FeatureBase):
 		self.logbook = Logbook()
 		self.timezone = tzlocal.get_localzone()
 		self.command_parser = ci.CommandParser()
-		self.command_parser.keywords = ("log",)
+		self.command_parser.keywords = ("workshift", "workshifts", "work", "shift")
 		self.command_parser.callbacks = {
-			"on": self.log_on, "off": self.log_off
+			"on": self.log_on, "off": self.log_off, "list": self.get_shifts
 		}
 		self.command_parser.interactive_methods = (
 			self.log_on, self.log_off
