@@ -98,10 +98,13 @@ class Logbook(dict):
 	def __str__(self):
 		return f"Logbook({self.workshifts})"
 
-	def __getitem__(self, date: str) -> list():
+	def __getitem__(self, date: datetime.datetime.date) -> list():
 		"""
 		Return the list with Workshifts that match the 
 		date of recording.
+		:param date:
+			datetime.datetime.date instance, when the logs where
+			recorded.
 		:returns:
 			list, containing Workshift instances if applicable
 			else, None
