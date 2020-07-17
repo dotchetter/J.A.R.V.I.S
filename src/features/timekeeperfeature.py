@@ -175,3 +175,11 @@ class TimeKeeperFeature(ci.FeatureBase):
 			self.active_workshift = None
 			return f"Workshift stopped. Logged time: {duration}"
 		return "There are no active workshift to terminate."
+
+	@ci.logger.loggedmethod
+	def get_shifts(self):
+		"""
+		Returns a formatted string from list of
+		recorded workshifts in the logbook.
+		"""
+		return [f"\n * {i}" for i in self.logbook[datetime.datetime.today.date()]]
