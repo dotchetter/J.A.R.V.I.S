@@ -135,9 +135,10 @@ class TimeKeeperFeature(ci.FeatureBase):
 		self.logbook = Logbook()
 		self.timezone = tzlocal.get_localzone()
 		self.command_parser = ci.CommandParser()
-		self.command_parser.keywords = ("workshift", "workshifts", "work", "shift")
+		self.command_parser.keywords = ("workshift", "work", "shift")
 		self.command_parser.callbacks = {
-			"on": self.log_on, "off": self.log_off, "list": self.get_shifts
+			"start": self.log_on, "end": self.log_off, 
+			"list": self.get_today_shifts
 		}
 		self.command_parser.interactive_methods = (
 			self.log_on, self.log_off
@@ -171,15 +172,25 @@ class TimeKeeperFeature(ci.FeatureBase):
 		if self.active_workshift:
 			self.active_workshift.stop()
 			self.logbook.append(self.active_workshift)
-			duration = self.active_workshift.duration
+			
+			hours = self.active_workshift.duration['hours']
+			minutes = self.active_workshift.duration['minutes']
+			
 			self.active_workshift = None
-			return f"Workshift stopped. Logged time: {duration}"
+			return f"Workshift lasted {hours} hours and {int(minutes)} minutes stopped."
 		return "There are no active workshift to terminate."
 
 	@ci.logger.loggedmethod
-	def get_shifts(self):
+	def get_today_shifts(self) -> str:
 		"""
 		Returns a formatted string from list of
 		recorded workshifts in the logbook.
+		:returns:
+			str, concatenated shifts if any are recorded.
+			otherwise phrase to indicate 0 shifts today.
 		"""
-		return [f"\n * {i}" for i in self.logbook[datetime.datetime.today.date()]]
+		out = "Shifts recorded today:\n\n"
+		todays_shifts = self.logbook[datetime.datetime.today().date()]
+		for shift in todays_shifts:
+			out += f"* {shift.duration}\n"
+		return out if len(todays_shifts) else "No shifts recorded today"

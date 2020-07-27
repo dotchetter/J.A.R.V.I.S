@@ -1,9 +1,0 @@
-# Ignore virtualenv
-Include/
-Lib/
-Scripts/
-tcl/
-LICENSE.txt
-
-# ignore cache
-__pycache__
