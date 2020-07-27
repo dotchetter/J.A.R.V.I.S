@@ -1,0 +1,3 @@
+[submodule "CommandIntegrator"]
+	path = CommandIntegrator
+	url = https://github.com/dotchetter/CommandIntegrator.git
