@@ -1,7 +1,8 @@
-import CommandIntegrator as ci
+import commandintegrator as ci
 import datetime
 import pytz
 import tzlocal
+
 
 class Workshift:
 	def __init__(self, timezone: pytz.timezone):

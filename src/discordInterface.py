@@ -1,6 +1,6 @@
-import CommandIntegrator as ci
+import commandintegrator as ci
 import discord
-import asyncio
+
 
 class discordInterface(discord.Client):
 	"""
