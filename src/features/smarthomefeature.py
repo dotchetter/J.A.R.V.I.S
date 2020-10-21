@@ -12,8 +12,8 @@ class SmartHomeFeature(ci.FeatureBase):
         self.serial_communicator = None
         self.command_parser = ci.CommandParser(keywords="alarm")
         self.command_parser.callbacks = (
-            ci.Callback(lead=("engage", "on"), func=self.engage_alarm),
-            ci.Callback(lead=("disengage", "off"), func=self.disengage_alarm))
+            ci.Callback(lead=("engage", "on", "activate"), func=self.engage_alarm),
+            ci.Callback(lead=("disengage", "off", "inactivate", "deactivate"), func=self.disengage_alarm))
         self.assign_serial_communicator()
 
     def assign_serial_communicator(self):
